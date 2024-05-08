@@ -18,7 +18,7 @@ RETURN cím, szereplőszám
 ORDER BY szereplőszám DESC
 LIMIT 1;
 
-HARMADIK FELADAT:
+ÖTÖDIK FELADAT:
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
 WITH p.name AS Actor, p.born AS BirthYear, COUNT(m.title) AS NumMoviesActedIn
 WHERE p.born > 1980
