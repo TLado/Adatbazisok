@@ -1,0 +1,25 @@
+ELSŐ FELADAT: 
+Filter: {"languages.0": "English","awards.wins": 2}
+
+Project: {title: 1, writers: 1, directors: 1, year: 1, _id: 0}
+
+Sort: {year: -1}
+
+MÁSODIK FELADAT: 
+db.users.find({email: {$regex: /.com/}}, {name: 1, email: 1, _id: 0})
+
+HARMADIK FELADAT: 
+db.movies.aggregate([ { $match: { year: { $gt: 1950 } } }, { $group: { _id: "$rated", averageRuntime: { $avg: "$runtime" } } }, { $project: { _id: 0, rated: "$_id", averageRuntime: 1 } } ])
+
+NEGYEDIK FELADAT:
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH m.title as cím, count(*) as szereplőszám
+RETURN cím, szereplőszám
+ORDER BY szereplőszám DESC
+LIMIT 1;
+
+HARMADIK FELADAT:
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH p.name AS Actor, p.born AS BirthYear, COUNT(m.title) AS NumMoviesActedIn
+WHERE p.born > 1980
+RETURN Actor, BirthYear, NumMoviesActedIn
